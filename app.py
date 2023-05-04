@@ -287,14 +287,14 @@ def signal_handle(data) -> str:
     Sample payload =  '{"side":"OpenShort","amount":"@0.006","symbol":"BTCUSDTPERP","passphrase":"1945","leverage":"125"}' # noqa:
     """
     if data["passphrase"] != SECRET_KEY:
-        notify.send(f"{BOT_NAME} รหัสผ่านไม่ถูกต้อง")
-        return "รหัสไม่ถูกต้อง :P"
+        notify.send(f"{BOT_NAME} valid password")
+        return "valid code :P"
 
     balance = check_balance("USDT")
 
     if float(balance) < FREEBALANCE:
-        notify.send("ยอดเงินไม่พอ")
-        return "ยอดเงินไม่พอ"
+        notify.send("Insufficient balance")
+        return "Insufficient balance"
 
     symbol = data["symbol"]
     if (symbol[len(symbol) - 4 : len(symbol)]) == "PERP":
@@ -339,7 +339,7 @@ def signal_handle(data) -> str:
         return message
     except Exception as e:
         print(e)
-        return f"{BOT_NAME} : เกิดข้อผิดพลาด\n{e}"
+        return f"{BOT_NAME} : An error occurred\n{e}"
 
 
 @app.route("/")
